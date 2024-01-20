@@ -1,11 +1,10 @@
 import { dirname, importx } from "@discordx/importer";
-import type { Interaction, Message } from "discord.js";
+import type { Guild, Interaction, Message } from "discord.js";
 import { IntentsBitField } from "discord.js";
 import { Client } from "discordx";
 
 export const bot = new Client({
-  // To use only guild command
-  // botGuilds: [(client) => client.guilds.cache.map((guild) => guild.id)],
+  botGuilds: [(client) => client.guilds.cache.map((guild) => guild.id)],
 
   // Discord intents
   intents: [
@@ -28,18 +27,17 @@ export const bot = new Client({
 
 bot.once("ready", async () => {
   // Make sure all guilds are cached
-  // await bot.guilds.fetch();
+  await bot.guilds.fetch();
+
+  await bot.guilds.cache.forEach(async (cachedGuild: Guild) => { 
+    console.log(`Populating cache for guild '${cachedGuild.name}'`);
+    await cachedGuild.roles.fetch();
+
+    console.log(`Guild cache populated. Continuing...`);
+  })
 
   // Synchronize applications commands with Discord
   await bot.initApplicationCommands();
-
-  // To clear all guild commands, uncomment this line,
-  // This is useful when moving from guild commands to global commands
-  // It must only be executed once
-  //
-  //  await bot.clearApplicationCommands(
-  //    ...bot.guilds.cache.map((g) => g.id)
-  //  );
 
   console.log("Bot started");
 });

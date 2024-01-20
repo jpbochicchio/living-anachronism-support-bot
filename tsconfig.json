@@ -13,8 +13,7 @@
 
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "noImplicitAny": true,
-    "esModuleInterop": true
+    "noImplicitAny": true
   },
   "exclude": ["build", "node_modules"]
 }
