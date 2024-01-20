@@ -57,7 +57,6 @@ npm run watch
 
 ```
 npm install --production
-npm run build
 npm run start
 ```
 
