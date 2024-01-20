@@ -9,10 +9,12 @@
     "allowSyntheticDefaultImports": true,
 
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": false,
+    "emitDecoratorMetadata": true,
 
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": true,
+    "esModuleInterop": true
   },
   "exclude": ["build", "node_modules"]
 }
