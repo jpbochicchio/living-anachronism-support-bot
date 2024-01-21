@@ -1,6 +1,8 @@
 import { Discord, Guard, SimpleCommand, SimpleCommandMessage } from "discordx";
 import { GuildMember } from "discord.js";
-import { IsStranger } from "../guards/is-stranger-guard.js";
+import { IsStranger } from "../guards/role-guards.js";
+import { CitizenEligibilityDetermination, userEligibleForCitizenship } from "../utilities/new-user-checks.js";
+import { addRoleByName, removeRoleByName } from "../utilities/utility-functions.js";
 
 @Discord()
 export class NewMemberVerification {
@@ -11,10 +13,20 @@ export class NewMemberVerification {
   @Guard(IsStranger)
   async verifyAndPromoteStranger(command: SimpleCommandMessage): Promise<void> {
     const targetUser: GuildMember | null = command.message.member;
-    await command.message.reply('You should see this message ONLY if I have the stranger role.');
-  }
 
-  private isGuildMember(user: GuildMember | null): user is GuildMember {
-    return null !== user;
+    if (!targetUser) {
+      await command.message.reply('Looks like the bot retrieved null member data. Please reach out to Faust for fixes');
+      return;
+    }
+
+    const eligibility: CitizenEligibilityDetermination = userEligibleForCitizenship(targetUser);
+
+    if (eligibility.isEligible) {
+      await addRoleByName(targetUser, 'Citizen');
+      await removeRoleByName(targetUser, 'Stranger');
+      await command.message.reply('You have been granted the citizen role in the Living Anachronism server, as your account passed all safety checks');
+    } else {
+      await command.message.reply(eligibility.denialReason || 'Your account could not be verified automatically');
+    }
   }
 }
