@@ -1,5 +1,5 @@
 import { GuildMember, Role } from "discord.js";
-import { memberHasRole } from "./new-user-checks";
+import { memberHasRole } from "./new-user-checks.js";
 
 export function isDefined(x: unknown): boolean {
   return (undefined !== x && null !== x);

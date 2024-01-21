@@ -15,12 +15,12 @@ export function userEligibleForCitizenship(newMember: GuildMember): CitizenEligi
   const userData: User = newMember.user;
   const accountAgeDays: number = DateTime.fromJSDate(userData.createdAt).diffNow().as('days');
 
-  if (!memberHasRole(newMember, 'Stranger') || memberHasRole(newMember, 'Citizen')) {
-    determination.denialReason = `You could not be automatically set as a citizen. You are already a citizen, or at least not a stranger`;
+  if (memberHasRole(newMember, 'Citizen')) {
+    determination.denialReason = `You could not be automatically set as a citizen. You are already a citizen!`;
     return determination;
   }
   
-  if (accountAgeDays < 90) {
+  if (Math.abs(accountAgeDays) < 90) {
     determination.denialReason = `You could not be automatically set as a citizen because your account is only ${accountAgeDays} day(s) old`;
     return determination;
   }
@@ -35,5 +35,5 @@ export function userEligibleForCitizenship(newMember: GuildMember): CitizenEligi
 }
 
 export function memberHasRole(member: GuildMember, roleName: string): boolean {
-  return member.guild.roles.cache.some((role: Role) => role.name === roleName);
+  return member.roles.cache.some((role: Role) => role.name === roleName);
 }
