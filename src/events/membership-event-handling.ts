@@ -16,6 +16,8 @@ export class MembershipEventHandler {
       await addRoleByName(newMember, 'Citizen');
       await removeRoleByName(newMember, 'Stranger');
       await newMember.send('You have been granted the citizen role in the Living Anachronism server, as your account passed all safety checks');
+    } else {
+      await newMember.send(`You could not automatically be granted the citizen role in Living Anachronism. Please reach out to the mods for more info. Reason: ${eligibility.denialReason}`);
     }
   }
 }
