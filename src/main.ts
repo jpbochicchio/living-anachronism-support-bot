@@ -32,14 +32,12 @@ bot.once("ready", async () => {
   await bot.guilds.cache.forEach(async (cachedGuild: Guild) => { 
     console.log(`Populating cache for guild '${cachedGuild.name}'`);
     await cachedGuild.roles.fetch();
-
-    console.log(`Guild cache populated. Continuing...`);
-  })
+  });
 
   // Synchronize applications commands with Discord
   await bot.initApplicationCommands();
 
-  console.log("Bot started");
+  console.log("Initialization complete");
 });
 
 bot.on("interactionCreate", (interaction: Interaction) => {

@@ -24,7 +24,7 @@ export class NewMemberVerification {
     if (eligibility.isEligible) {
       await addRoleByName(targetUser, 'Citizen');
       await removeRoleByName(targetUser, 'Stranger');
-      await command.message.reply('You have been granted the citizen role in the Living Anachronism server, as your account passed all safety checks');
+      await command.message.reply('You have been granted the citizen role in the Living Anachronism server, as your account passed all safety checks. You may now choose your #roles');
     } else {
       await command.message.reply(eligibility.denialReason || 'Your account could not be verified automatically');
     }

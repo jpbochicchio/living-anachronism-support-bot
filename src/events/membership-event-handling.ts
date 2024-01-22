@@ -1,8 +1,7 @@
-import { ArgsOf, Client, Discord, On } from "discordx";
+import { Client, Discord, On } from "discordx";
 import type { NewMemberArguments } from "../types/event-types.js";
 import { CitizenEligibilityDetermination, userEligibleForCitizenship } from "../utilities/new-user-checks.js";
-import { Collection, Role } from "discord.js";
-import { addRoleByName, isDefined, removeRoleByName } from "../utilities/utility-functions.js";
+import { addRoleByName, removeRoleByName } from "../utilities/utility-functions.js";
 
 @Discord()
 export class MembershipEventHandler {
@@ -15,7 +14,7 @@ export class MembershipEventHandler {
     
       await addRoleByName(newMember, 'Citizen');
       await removeRoleByName(newMember, 'Stranger');
-      await newMember.send('You have been granted the citizen role in the Living Anachronism server, as your account passed all safety checks');
+      await newMember.send('You have been granted the citizen role in the Living Anachronism server, as your account passed all safety checks. You may now choose your #roles');
     } else {
       await newMember.send(`You could not automatically be granted the citizen role in Living Anachronism. Please reach out to the mods for more info. Reason: ${eligibility.denialReason}`);
     }
