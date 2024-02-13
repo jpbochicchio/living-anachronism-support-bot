@@ -1,4 +1,4 @@
-import { GuildMember, Role, User } from "discord.js";
+import { GuildMember, GuildMemberRoleManager, Role, RoleManager, User } from "discord.js";
 import { DateTime } from "luxon";
 
 export type CitizenEligibilityDetermination = {
@@ -36,4 +36,11 @@ export function userEligibleForCitizenship(newMember: GuildMember): CitizenEligi
 
 export function memberHasRole(member: GuildMember, roleName: string): boolean {
   return member.roles.cache.some((role: Role) => role.name === roleName);
+}
+
+export async function getRole(roleManager: RoleManager | undefined, roleName: string): Promise<Role | undefined> {
+  console.log(`Fetching roles...`);
+  await roleManager?.fetch();
+  console.log(`All roles have been fetched`);
+  return roleManager?.cache.find((role: Role) => role.name === roleName);
 }

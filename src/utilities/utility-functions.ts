@@ -26,3 +26,9 @@ export async function addRoleByName(member: GuildMember, roleName: string): Prom
     console.log(`Role '${roleName}' could not be added to user '${member.displayName}'`);
   }
 }
+
+export function panicIfUndefined<T>(value: T | undefined): asserts value is T {
+  if (undefined === value || typeof value === "undefined" || null === value) {
+    throw new Error('Supplied value was null or undefined - terminating calling process');
+  }
+}
