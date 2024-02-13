@@ -4,6 +4,7 @@
 .env.local
 package-lock.json
 yarn.lock
+.env.yaml
 
 # folders
 build
