@@ -23,6 +23,9 @@ dependencies:
   discordx:
     specifier: ^11.9.0
     version: 11.9.0(discord.js@14.14.1)
+  dotenv:
+    specifier: ^16.4.3
+    version: 16.4.3
   luxon:
     specifier: ^3.4.4
     version: 3.4.4
@@ -977,6 +980,11 @@ packages:
       discord.js: 14.14.1
       lodash: 4.17.21
       tslib: 2.6.2
+    dev: false
+
+  /dotenv@16.4.3:
+    resolution: {integrity: sha512-II98GFrje5psQTSve0E7bnwMFybNLqT8Vu8JIFWRjsE3khyNUm/loZupuy5DVzG2IXf/ysxvrixYOQnM6mjD3A==}
+    engines: {node: '>=12'}
     dev: false
 
   /eastasianwidth@0.2.0:

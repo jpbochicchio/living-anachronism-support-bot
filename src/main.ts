@@ -2,6 +2,10 @@ import { dirname, importx } from "@discordx/importer";
 import type { Guild, Interaction, Message } from "discord.js";
 import { IntentsBitField } from "discord.js";
 import { Client } from "discordx";
+import { configDotenv } from "dotenv";
+
+configDotenv();
+console.log(process.env.OTHER_VAR);
 
 export const bot = new Client({
   botGuilds: [(client) => client.guilds.cache.map((guild) => guild.id)],
